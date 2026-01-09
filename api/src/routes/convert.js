@@ -1,8 +1,10 @@
 import express from "express";
 import ytdl from "ytdl-core";
 import ffmpeg from "fluent-ffmpeg";
+import ffmpegPath from "ffmpeg-static";
 
 const router = express.Router();
+ffmpeg.setFfmpegPath(ffmpegPath);
 
 router.post("/mp3", async (req, res) => {
     const { url } = req.body;
@@ -28,7 +30,7 @@ router.post("/mp3", async (req, res) => {
         console.error(err);
         res.status(500).json({ error: "Failed to process video"});
     }
-    
+
 });
 
 export default router;
